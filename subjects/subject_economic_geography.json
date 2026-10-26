@@ -1,0 +1,16 @@
+[
+  {
+    "year": "2023",
+    "qno": "3",
+    "subject": "Economic Geography",
+    "question": "Consider the following statements:\n1. India has more arable area than China.\n2. The proportion of irrigated area is more in India as compared to China.\n3. The average productivity per hectare in Indian agriculture is higher than that in China.\nHow many of the above statements are correct?",
+    "options": [
+      "Only one",
+      "Only two",
+      "All three",
+      "None"
+    ],
+    "answer": "B",
+    "explanation": "Statement 1 is correct: India possesses the largest arable land area in the world (~156 million hectares), surpassing China (~119 million hectares). Statement 2 is correct: A higher proportion of India's total cultivated land is equipped for irrigation compared to China's total arable land proportion. Statement 3 is incorrect: China's agricultural productivity per hectare for major crops like rice, wheat, and maize is nearly double that of India due to higher mechanization and intensive input use. Therefore, only two statements are correct."
+  }
+]

@@ -1,0 +1,72 @@
+[
+  {
+    "year": 2023,
+    "qno": "1",
+    "subject": "Medieval Indian History",
+    "question": "Consider the following dynasties:\n1. Hoysala\n2. Gahadavala\n3. Kakatiya\n4. Yadava\nHow many of the above dynasties established their kingdoms in early eighth century AD?",
+    "options": [
+      "Only one",
+      "Only two",
+      "Only three",
+      "None"
+    ],
+    "answer": "D",
+    "explanation": "None of these dynasties established kingdoms in the early 8th century AD. The Gahadavalas of Kannauj, Hoysalas of Dvarasamudra, Kakatiyas of Warangal, and Yadavas (Seunas) of Devagiri all emerged as independent kingdom-builders later, primarily during the 11th and 12th centuries AD."
+  },
+  {
+    "year": 2023,
+    "qno": "2",
+    "subject": "Science & Technology",
+    "question": "Consider the following statements:\nStatement-I: India, despite having uranium deposits, depends on coal for most of its electricity production.\nStatement-II: Uranium, enriched to the extent of at least 60%, is required for the production of electricity in a nuclear power plant.\nWhich one of the following is correct in respect of the above statements?",
+    "options": [
+      "Both Statement-I and Statement-II are correct and Statement-II is the correct explanation for Statement-I",
+      "Both Statement-I and Statement-II are correct and Statement-II is not the correct explanation for Statement-I",
+      "Statement-I is correct but Statement-II is incorrect",
+      "Statement-I is incorrect but Statement-II is correct"
+    ],
+    "answer": "C",
+    "explanation": "Statement-I is correct: Coal accounts for over 50% of India's total electricity generation, while nuclear energy contributes around 2-3%, despite domestic uranium reserves. Statement-II is incorrect: Commercial nuclear power reactors use low-enriched uranium (LEU) typically enriched to 3% to 5% U-235 (or even natural un-enriched uranium in PHWRs). Uranium enriched to 60% or higher is considered highly enriched uranium (HEU) and is used in research reactors, naval propulsion, or nuclear weapons, not standard civil power plants."
+  },
+  {
+    "year": 2023,
+    "qno": "3",
+    "subject": "Economic Geography",
+    "question": "Consider the following statements:\n1. India has more arable area than China.\n2. The proportion of irrigated area is more in India as compared to China.\n3. The average productivity per hectare in Indian agriculture is higher than that in China.\nHow many of the above statements are correct?",
+    "options": [
+      "Only one",
+      "Only two",
+      "All three",
+      "None"
+    ],
+    "answer": "B",
+    "explanation": "Statement 1 is correct: India possesses the largest arable land area in the world (~156 million hectares), surpassing China (~119 million hectares). Statement 2 is correct: A higher proportion of India's total cultivated land is equipped for irrigation compared to China's total arable land proportion. Statement 3 is incorrect: China's agricultural productivity per hectare for major crops like rice, wheat, and maize is nearly double that of India due to higher mechanization and intensive input use. Therefore, only two statements are correct."
+  },
+  {
+    "year": 2023,
+    "qno": "4",
+    "subject": "Geomorphology",
+    "question": "Which one of the following is the best example of repeated falls in sea level, giving rise to present-day extensive marshland?",
+    "options": [
+      "Bhitarkanika Mangroves",
+      "Marakkanam Salt Pans",
+      "Naupada Swamp",
+      "Rann of Kutch"
+    ],
+    "answer": "D",
+    "explanation": "The Great and Little Rann of Kutch represent extensive salt marshes that were once shallow marine gulfs/inlets of the Arabian Sea. Repeated marine regressions, tectonic uplifts, and siltation led to the recession of the sea, resulting in the present-day seasonal and hyper-saline mudflats and marshes."
+  },
+  {
+    "year": 2023,
+    "qno": "5",
+    "subject": "World Economy",
+    "question": "Consider the following statements:\nStatement-I: Switzerland is one of the leading exporters of gold in terms of value.\nStatement-II: Switzerland has the second largest gold reserves in the world.\nWhich one of the following is correct in respect of the above statements?",
+    "options": [
+      "Both Statement-I and Statement-II are correct and Statement-II is the correct explanation for Statement-I",
+      "Both Statement-I and Statement-II are correct and Statement-II is not the correct explanation for Statement-I",
+      "Statement-I is correct but Statement-II is incorrect",
+      "Statement-I is incorrect but Statement-II is correct"
+    ],
+    "answer": "C",
+    "explanation": "Statement-I is correct: Switzerland is the world's leading gold refining hub and ranks among the top global exporters of gold by value. Statement-II is incorrect: According to the World Gold Council, the United States holds the largest gold reserves (~8,133 tonnes), followed by Germany, Italy, France, Russia, and China; Switzerland ranks around 7th or 8th globally, not second."
+  }
+]

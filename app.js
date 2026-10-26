@@ -1,0 +1,735 @@
+// ==========================================
+// 1. CONFIGURATION & STATE STORE
+// ==========================================
+const MARKS_PER_CORRECT = 2.0;
+const NEGATIVE_MARK = 0.66;
+const KNOWN_YEAR_RANGE = [2011, 2027]; // Range scanned for questions/gsp_YYYY.json
+
+const state = {
+  isReviewMode: false,
+  currentIndex: 0,
+  timeRemaining: 0,
+  timerId: null,
+  isPaused: false,
+  activeQuestions: [],
+  userAnswers: {},
+  detectedYears: [],
+  minYear: null,
+  maxYear: null,
+  subjectManifest: []
+};
+
+// DOM References
+const elements = {
+  appHeaderTitle: document.getElementById('appHeaderTitle'),
+  timerDisplay: document.getElementById('timerDisplay'),
+  btnPause: document.getElementById('btnPause'),
+  btnFullscreen: document.getElementById('btnFullscreen'),
+  btnSubmitTop: document.getElementById('btnSubmitTop'),
+  btnRetakeTop: document.getElementById('btnRetakeTop'),
+  questionNumber: document.getElementById('questionNumber'),
+  subjectTag: document.getElementById('subjectTag'),
+  yearTag: document.getElementById('yearTag'),
+  qnoTag: document.getElementById('qnoTag'),
+  questionText: document.getElementById('questionText'),
+  optionsContainer: document.getElementById('optionsContainer'),
+  reviewDetails: document.getElementById('reviewDetails'),
+  userStatusText: document.getElementById('userStatusText'),
+  correctAnswerText: document.getElementById('correctAnswerText'),
+  explanationText: document.getElementById('explanationText'),
+  attemptActions: document.getElementById('attemptActions'),
+  reviewActions: document.getElementById('reviewActions'),
+  btnPrev: document.getElementById('btnPrev'),
+  btnNext: document.getElementById('btnNext'),
+  btnClear: document.getElementById('btnClear'),
+  btnSaveNext: document.getElementById('btnSaveNext'),
+  paletteGrid: document.getElementById('paletteGrid'),
+  paletteCount: document.getElementById('paletteCount'),
+  paletteLegend: document.getElementById('paletteLegend'),
+  startModal: document.getElementById('startModal'),
+  yearGroup: document.getElementById('yearGroup'),
+  subjectGroup: document.getElementById('subjectGroup'),
+  yearInput: document.getElementById('yearInput'),
+  yearBoundsHint: document.getElementById('yearBoundsHint'),
+  yearError: document.getElementById('yearError'),
+  subjectSelect: document.getElementById('subjectSelect'),
+  subjectError: document.getElementById('subjectError'),
+  poolAvailableCount: document.getElementById('poolAvailableCount'),
+  numQuestionsInput: document.getElementById('numQuestionsInput'),
+  countError: document.getElementById('countError'),
+  timerEstimateHint: document.getElementById('timerEstimateHint'),
+  timerModeSelect: document.getElementById('timerModeSelect'),
+  btnStartConfirmed: document.getElementById('btnStartConfirmed'),
+  submitModal: document.getElementById('submitModal'),
+  submitSummaryStats: document.getElementById('submitSummaryStats'),
+  btnCancelSubmit: document.getElementById('btnCancelSubmit'),
+  btnConfirmSubmit: document.getElementById('btnConfirmSubmit'),
+  resultModal: document.getElementById('resultModal'),
+  btnEnterReview: document.getElementById('btnEnterReview')
+};
+
+// In-memory cache for fetched JSON datasets
+const dataCache = {
+  years: {},    // yr -> []
+  subjects: {}  // filename -> []
+};
+
+// ==========================================
+// 2. DISCOVERY & INITIALIZATION
+// ==========================================
+async function initEngine() {
+  clearErrors();
+  elements.btnStartConfirmed.disabled = true;
+
+  await Promise.all([
+    detectAvailableYears(),
+    loadSubjectManifest()
+  ]);
+
+  syncFilterModeUI();
+  await updateAvailability();
+  elements.btnStartConfirmed.disabled = false;
+}
+
+// Probes questions/gsp_YYYY.json for available years
+async function detectAvailableYears() {
+  const probeYears = [];
+  for (let yr = KNOWN_YEAR_RANGE[1]; yr >= KNOWN_YEAR_RANGE[0]; yr--) {
+    probeYears.push(yr);
+  }
+
+  const checks = probeYears.map(async (yr) => {
+    try {
+      const res = await fetch(`questions/gsp_${yr}.json`, { method: 'HEAD' });
+      if (res.ok) return yr;
+    } catch (_) {}
+    return null;
+  });
+
+  const results = await Promise.all(checks);
+  state.detectedYears = results.filter(Boolean).sort((a, b) => b - a);
+
+  if (state.detectedYears.length > 0) {
+    state.minYear = Math.min(...state.detectedYears);
+    state.maxYear = Math.max(...state.detectedYears);
+    elements.yearInput.min = state.minYear;
+    elements.yearInput.max = state.maxYear;
+    elements.yearInput.value = state.maxYear;
+    elements.yearInput.placeholder = `e.g. [${state.minYear}, ${state.maxYear}]`;
+    elements.yearBoundsHint.textContent = `Range: [${state.minYear}, ${state.maxYear}]`;
+  } else {
+    elements.yearBoundsHint.textContent = 'No year files found';
+    elements.yearInput.placeholder = 'N/A';
+    elements.yearInput.disabled = true;
+  }
+}
+
+// Loads subjects/manifest.json generated by extract_subjects.py
+async function loadSubjectManifest() {
+  try {
+    const res = await fetch('subjects/manifest.json?_=' + Date.now());
+    if (res.ok) {
+      const data = await res.json();
+      state.subjectManifest = data.subjects || [];
+      populateSubjectDropdown();
+    }
+  } catch (err) {
+    console.warn('subjects/manifest.json not found:', err);
+    elements.subjectSelect.innerHTML = '<option value="">No manifest.json found</option>';
+  }
+}
+
+function populateSubjectDropdown() {
+  elements.subjectSelect.innerHTML = '';
+  if (!state.subjectManifest || state.subjectManifest.length === 0) {
+    const opt = document.createElement('option');
+    opt.value = '';
+    opt.textContent = 'No subjects available';
+    elements.subjectSelect.appendChild(opt);
+    return;
+  }
+
+  state.subjectManifest.forEach(s => {
+    const opt = document.createElement('option');
+    opt.value = s.filename;
+    opt.textContent = `${s.name} (${s.count})`;
+    elements.subjectSelect.appendChild(opt);
+  });
+}
+
+// ==========================================
+// 3. TARGETED DATA FETCHING
+// ==========================================
+async function fetchQuestionsByYear(yr) {
+  if (dataCache.years[yr]) return dataCache.years[yr];
+  try {
+    const res = await fetch(`questions/gsp_${yr}.json?_=${Date.now()}`);
+    if (res.ok) {
+      const data = await res.json();
+      data.forEach((q, idx) => {
+        if (!q.year) q.year = String(yr);
+        if (!q.qno) q.qno = String(idx + 1);
+      });
+      dataCache.years[yr] = data;
+      return data;
+    }
+  } catch (err) {
+    console.error(`Failed to fetch questions/gsp_${yr}.json:`, err);
+  }
+  return [];
+}
+
+async function fetchQuestionsBySubject(filename) {
+  if (dataCache.subjects[filename]) return dataCache.subjects[filename];
+  try {
+    const res = await fetch(`subjects/${filename}?_=${Date.now()}`);
+    if (res.ok) {
+      const data = await res.json();
+      dataCache.subjects[filename] = data;
+      return data;
+    }
+  } catch (err) {
+    console.error(`Failed to fetch subjects/${filename}:`, err);
+  }
+  return [];
+}
+
+async function fetchAllQuestions() {
+  const promises = state.detectedYears.map(yr => fetchQuestionsByYear(yr));
+  const results = await Promise.all(promises);
+  return results.flat();
+}
+
+// ==========================================
+// 4. INDEPENDENT FILTER LOGIC & AVAILABILITY
+// ==========================================
+function getSelectedFilterMode() {
+  const checked = document.querySelector('input[name="filterMode"]:checked');
+  return checked ? checked.value : 'year';
+}
+
+function syncFilterModeUI() {
+  const mode = getSelectedFilterMode();
+  clearErrors();
+
+  if (mode === 'year') {
+    elements.yearGroup.style.display = 'block';
+    elements.subjectGroup.style.display = 'none';
+  } else if (mode === 'subject') {
+    elements.yearGroup.style.display = 'none';
+    elements.subjectGroup.style.display = 'block';
+  } else {
+    elements.yearGroup.style.display = 'none';
+    elements.subjectGroup.style.display = 'none';
+  }
+}
+
+async function updateAvailability() {
+  clearErrors();
+  const mode = getSelectedFilterMode();
+  let availableCount = 0;
+
+  if (mode === 'year') {
+    const rawVal = elements.yearInput.value.trim();
+    const yr = parseInt(rawVal, 10);
+
+    if (rawVal === '') {
+      showError(elements.yearError, `Please enter a year between [${state.minYear}, ${state.maxYear}].`);
+      elements.yearInput.classList.add('input-invalid');
+    } else if (isNaN(yr) || yr < state.minYear || yr > state.maxYear) {
+      showError(elements.yearError, `Year out of bounds. Enter within [${state.minYear}, ${state.maxYear}].`);
+      elements.yearInput.classList.add('input-invalid');
+    } else if (!state.detectedYears.includes(yr)) {
+      showError(elements.yearError, `questions/gsp_${yr}.json does not exist.`);
+      elements.yearInput.classList.add('input-invalid');
+    } else {
+      elements.yearInput.classList.remove('input-invalid');
+      const questions = await fetchQuestionsByYear(yr);
+      availableCount = questions.length;
+    }
+  } else if (mode === 'subject') {
+    const filename = elements.subjectSelect.value;
+    if (!filename) {
+      showError(elements.subjectError, 'Please select a valid subject.');
+    } else {
+      const item = state.subjectManifest.find(s => s.filename === filename);
+      if (item) {
+        availableCount = item.count;
+      } else {
+        const questions = await fetchQuestionsBySubject(filename);
+        availableCount = questions.length;
+      }
+    }
+  } else {
+    // All Questions
+    availableCount = state.subjectManifest.reduce((acc, s) => acc + (s.count || 0), 0);
+    if (availableCount === 0 && state.detectedYears.length > 0) {
+      const allQ = await fetchAllQuestions();
+      availableCount = allQ.length;
+    }
+  }
+
+  elements.poolAvailableCount.textContent = `Available: ${availableCount}`;
+
+  if (availableCount === 0) {
+    elements.numQuestionsInput.value = 0;
+    elements.numQuestionsInput.min = 0;
+    elements.numQuestionsInput.max = 0;
+    elements.numQuestionsInput.disabled = true;
+    elements.btnStartConfirmed.disabled = true;
+    updateTimerHint(0);
+  } else {
+    elements.numQuestionsInput.disabled = false;
+    elements.numQuestionsInput.min = 1;
+    elements.numQuestionsInput.max = availableCount;
+
+    let currentVal = parseInt(elements.numQuestionsInput.value, 10);
+    if (isNaN(currentVal) || currentVal < 1 || currentVal > availableCount) {
+      currentVal = Math.min(availableCount, 100);
+      elements.numQuestionsInput.value = currentVal;
+    }
+    elements.btnStartConfirmed.disabled = false;
+    updateTimerHint(currentVal);
+  }
+}
+
+function updateTimerHint(qCount) {
+  const mode = elements.timerModeSelect.value;
+  if (mode === 'none') {
+    elements.timerEstimateHint.textContent = 'Calculated duration: Unlimited (Self-Paced)';
+    return;
+  }
+  const perQ = mode === 'speed' ? 45 : 72;
+  const count = (!qCount || qCount < 1) ? 1 : qCount;
+  const totalSeconds = count * perQ;
+  const mins = Math.floor(totalSeconds / 60);
+  const secs = totalSeconds % 60;
+  const timeText = secs > 0 ? `${mins}m ${secs}s` : `${mins} minutes`;
+  elements.timerEstimateHint.textContent = `Calculated duration: ${timeText} (${perQ}s / question)`;
+}
+
+function showError(el, message) {
+  if (!el) return;
+  el.textContent = message;
+  el.style.display = 'block';
+}
+
+function clearErrors() {
+  elements.yearError.style.display = 'none';
+  elements.subjectError.style.display = 'none';
+  elements.countError.style.display = 'none';
+  elements.yearInput.classList.remove('input-invalid');
+  elements.numQuestionsInput.classList.remove('input-invalid');
+}
+
+// ==========================================
+// 5. TIMER & FULLSCREEN ENGINE
+// ==========================================
+function startTimer(seconds) {
+  if (state.timerId) clearInterval(state.timerId);
+  if (seconds <= 0) {
+    elements.timerDisplay.textContent = 'Untimed';
+    elements.btnPause.style.display = 'none';
+    return;
+  }
+
+  state.timeRemaining = seconds;
+  elements.btnPause.style.display = 'inline-block';
+  renderTimer();
+
+  state.timerId = setInterval(() => {
+    if (!state.isPaused && state.timeRemaining > 0) {
+      state.timeRemaining--;
+      renderTimer();
+      if (state.timeRemaining <= 0) {
+        clearInterval(state.timerId);
+        handleTestSubmit();
+      }
+    }
+  }, 1000);
+}
+
+function renderTimer() {
+  const h = String(Math.floor(state.timeRemaining / 3600)).padStart(2, '0');
+  const m = String(Math.floor((state.timeRemaining % 3600) / 60)).padStart(2, '0');
+  const s = String(state.timeRemaining % 60).padStart(2, '0');
+  elements.timerDisplay.textContent = `${h}:${m}:${s}`;
+}
+
+function toggleFullScreen() {
+  const doc = window.document;
+  const docEl = doc.documentElement;
+  const req = docEl.requestFullscreen || docEl.webkitRequestFullscreen || docEl.msRequestFullscreen;
+  const exit = doc.exitFullscreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+
+  if (!doc.fullscreenElement && !doc.webkitFullscreenElement) {
+    if (req) req.call(docEl).catch(() => {});
+    elements.btnFullscreen.textContent = 'Exit Fullscreen';
+  } else {
+    if (exit) exit.call(doc).catch(() => {});
+    elements.btnFullscreen.textContent = 'Fullscreen';
+  }
+}
+
+// ==========================================
+// 6. QUESTION RENDERING & PALETTE
+// ==========================================
+function renderQuestion(index) {
+  if (!state.activeQuestions || state.activeQuestions.length === 0) return;
+  state.currentIndex = index;
+  const q = state.activeQuestions[index];
+
+  elements.questionNumber.textContent = `Question ${index + 1} of ${state.activeQuestions.length}`;
+  elements.questionText.textContent = q.question;
+
+  elements.subjectTag.textContent = q.subject || q.topic || 'General';
+  if (q.year) {
+    elements.yearTag.textContent = q.year;
+    elements.yearTag.style.display = 'inline-block';
+  } else {
+    elements.yearTag.style.display = 'none';
+  }
+
+  if (state.isReviewMode && q.qno) {
+    elements.qnoTag.style.display = 'inline-block';
+    elements.qnoTag.textContent = `PYQ #${q.qno}`;
+  } else {
+    elements.qnoTag.style.display = 'none';
+  }
+
+  // Render Options
+  elements.optionsContainer.innerHTML = '';
+  const letters = ['A', 'B', 'C', 'D'];
+  const currentSelected = state.userAnswers[index];
+
+  q.options.forEach((optText, i) => {
+    const letter = letters[i];
+    const label = document.createElement('label');
+    label.className = `option-item ${currentSelected === letter ? 'selected' : ''}`;
+
+    const input = document.createElement('input');
+    input.type = 'radio';
+    input.name = `opt_q${index}`;
+    input.value = letter;
+    input.checked = currentSelected === letter;
+    input.disabled = state.isReviewMode;
+
+    if (!state.isReviewMode) {
+      label.addEventListener('click', () => {
+        state.userAnswers[index] = letter;
+        renderQuestion(index);
+      });
+    }
+
+    const span = document.createElement('span');
+    span.textContent = `(${letter}) ${optText}`;
+
+    label.appendChild(input);
+    label.appendChild(span);
+    elements.optionsContainer.appendChild(label);
+  });
+
+  // Review Mode Box
+  if (state.isReviewMode) {
+    elements.reviewDetails.style.display = 'block';
+    const isAnswered = currentSelected !== undefined;
+    const isCorrect = currentSelected === q.answer;
+
+    elements.reviewDetails.className = `review-box ${
+      !isAnswered ? '' : (isCorrect ? 'review-correct' : 'review-wrong')
+    }`;
+
+    elements.userStatusText.textContent = `Your Answer: ${currentSelected ? `(${currentSelected})` : 'Unattempted'}`;
+    elements.userStatusText.style.color = isCorrect ? 'var(--green-attempted)' : (isAnswered ? 'var(--red-wrong)' : 'var(--text-muted)');
+
+    elements.correctAnswerText.textContent = `Official Answer: (${q.answer})`;
+    elements.correctAnswerText.style.color = 'var(--green-attempted)';
+
+    elements.explanationText.textContent = q.explanation || 'No explanation provided.';
+  } else {
+    elements.reviewDetails.style.display = 'none';
+  }
+
+  renderPalette();
+}
+
+function renderPalette() {
+  elements.paletteGrid.innerHTML = '';
+  if (!state.activeQuestions || state.activeQuestions.length === 0) {
+    elements.paletteCount.textContent = '0/0';
+    return;
+  }
+
+  const fragment = document.createDocumentFragment();
+  let attemptedCount = 0;
+
+  state.activeQuestions.forEach((q, i) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'q-btn';
+    btn.textContent = i + 1;
+
+    if (i === state.currentIndex) {
+      btn.classList.add('active');
+    }
+
+    const userAns = state.userAnswers[i];
+    const isAttempted = userAns !== undefined;
+    if (isAttempted) attemptedCount++;
+
+    if (!state.isReviewMode) {
+      if (isAttempted) btn.classList.add('attempted');
+    } else {
+      if (isAttempted) {
+        if (userAns === q.answer) btn.classList.add('rev-correct');
+        else btn.classList.add('rev-wrong');
+      }
+    }
+
+    btn.addEventListener('click', () => {
+      renderQuestion(i);
+    });
+
+    fragment.appendChild(btn);
+  });
+
+  elements.paletteGrid.appendChild(fragment);
+  elements.paletteCount.textContent = `${attemptedCount}/${state.activeQuestions.length}`;
+}
+
+function clearResponse() {
+  if (state.isReviewMode) return;
+  delete state.userAnswers[state.currentIndex];
+  renderQuestion(state.currentIndex);
+}
+
+// ==========================================
+// 7. SUBMISSION & SCORING (+2.0 / -0.66)
+// ==========================================
+function showSubmitConfirmation() {
+  const attempted = Object.keys(state.userAnswers).length;
+  const unattempted = state.activeQuestions.length - attempted;
+  elements.submitSummaryStats.textContent = `Attempted: ${attempted} | Unattempted: ${unattempted}`;
+  elements.submitModal.style.display = 'flex';
+}
+
+function handleTestSubmit() {
+  elements.submitModal.style.display = 'none';
+  if (state.timerId) clearInterval(state.timerId);
+
+  let correct = 0;
+  let wrong = 0;
+
+  state.activeQuestions.forEach((q, idx) => {
+    const userChoice = state.userAnswers[idx];
+    if (userChoice) {
+      if (userChoice === q.answer) correct++;
+      else wrong++;
+    }
+  });
+
+  const total = state.activeQuestions.length;
+  const attempted = correct + wrong;
+  const unattempted = total - attempted;
+  const netScore = (correct * MARKS_PER_CORRECT) - (wrong * NEGATIVE_MARK);
+  const maxPossible = total * MARKS_PER_CORRECT;
+  const accuracy = attempted > 0 ? ((correct / attempted) * 100).toFixed(1) : '0.0';
+
+  document.getElementById('resTotal').textContent = total;
+  document.getElementById('resAttempted').textContent = attempted;
+  document.getElementById('resUnattempted').textContent = unattempted;
+  document.getElementById('resCorrect').textContent = correct;
+  document.getElementById('resWrong').textContent = wrong;
+  document.getElementById('resFinalScore').textContent = `${netScore.toFixed(2)} / ${maxPossible.toFixed(2)}`;
+  document.getElementById('resAccuracy').textContent = `${accuracy}%`;
+
+  elements.resultModal.style.display = 'flex';
+}
+
+function enterReviewMode() {
+  elements.resultModal.style.display = 'none';
+  state.isReviewMode = true;
+
+  elements.appHeaderTitle.textContent = 'GS Prelims Review Mode';
+  elements.timerDisplay.textContent = 'Review Mode';
+  elements.btnPause.style.display = 'none';
+  elements.btnSubmitTop.style.display = 'none';
+  elements.btnRetakeTop.style.display = 'inline-block';
+
+  elements.attemptActions.style.display = 'none';
+  elements.reviewActions.style.display = 'flex';
+
+  elements.paletteLegend.innerHTML = `
+    <strong>Review Status:</strong><br>
+    Correct: <span style="color: var(--green-attempted); font-weight: bold;">Green</span> | 
+    Wrong: <span style="color: var(--red-wrong); font-weight: bold;">Red</span> | 
+    Unattempted: <span>No Color</span>
+  `;
+
+  renderQuestion(0);
+}
+
+function resetToStartModal() {
+  if (state.timerId) clearInterval(state.timerId);
+
+  state.isReviewMode = false;
+  state.currentIndex = 0;
+  state.isPaused = false;
+  state.userAnswers = {};
+
+  elements.appHeaderTitle.textContent = 'GS Prelims Mock';
+  elements.btnPause.style.display = 'inline-block';
+  elements.btnPause.textContent = 'Pause';
+  elements.btnSubmitTop.style.display = 'inline-block';
+  elements.btnRetakeTop.style.display = 'none';
+
+  elements.attemptActions.style.display = 'flex';
+  elements.reviewActions.style.display = 'none';
+  elements.reviewDetails.style.display = 'none';
+
+  elements.paletteLegend.innerHTML = `
+    <strong>Status:</strong><br>
+    Attempted: <span class="legend-attempted">Green</span> | Unattempted: <span>No Color</span>
+  `;
+
+  elements.resultModal.style.display = 'none';
+  elements.submitModal.style.display = 'none';
+  updateAvailability();
+  elements.startModal.style.display = 'flex';
+}
+
+// ==========================================
+// 8. EVENT LISTENERS
+// ==========================================
+function setupEventListeners() {
+  elements.btnFullscreen.addEventListener('click', toggleFullScreen);
+
+  elements.btnPause.addEventListener('click', () => {
+    state.isPaused = !state.isPaused;
+    elements.btnPause.textContent = state.isPaused ? 'Resume' : 'Pause';
+  });
+
+  elements.btnSubmitTop.addEventListener('click', showSubmitConfirmation);
+  elements.btnCancelSubmit.addEventListener('click', () => {
+    elements.submitModal.style.display = 'none';
+  });
+  elements.btnConfirmSubmit.addEventListener('click', handleTestSubmit);
+  elements.btnEnterReview.addEventListener('click', enterReviewMode);
+  elements.btnRetakeTop.addEventListener('click', resetToStartModal);
+
+  elements.btnClear.addEventListener('click', clearResponse);
+
+  elements.btnSaveNext.addEventListener('click', () => {
+    if (state.currentIndex < state.activeQuestions.length - 1) {
+      renderQuestion(state.currentIndex + 1);
+    }
+  });
+
+  elements.btnNext.addEventListener('click', () => {
+    if (state.currentIndex < state.activeQuestions.length - 1) {
+      renderQuestion(state.currentIndex + 1);
+    }
+  });
+
+  elements.btnPrev.addEventListener('click', () => {
+    if (state.currentIndex > 0) {
+      renderQuestion(state.currentIndex - 1);
+    }
+  });
+
+  // Filter mode toggle
+  document.querySelectorAll('input[name="filterMode"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+      syncFilterModeUI();
+      updateAvailability();
+    });
+  });
+
+  // Year input events
+  elements.yearInput.addEventListener('input', updateAvailability);
+  elements.yearInput.addEventListener('blur', () => {
+    let val = parseInt(elements.yearInput.value, 10);
+    if (!isNaN(val)) {
+      if (val < state.minYear) elements.yearInput.value = state.minYear;
+      else if (val > state.maxYear) elements.yearInput.value = state.maxYear;
+    }
+    updateAvailability();
+  });
+
+  // Subject change
+  elements.subjectSelect.addEventListener('change', updateAvailability);
+
+  // Timer change
+  elements.timerModeSelect.addEventListener('change', () => {
+    const val = parseInt(elements.numQuestionsInput.value, 10);
+    updateTimerHint(val);
+  });
+
+  // Question count change
+  elements.numQuestionsInput.addEventListener('input', (e) => {
+    const val = parseInt(e.target.value, 10);
+    if (!isNaN(val) && val >= 1) updateTimerHint(val);
+  });
+
+  elements.numQuestionsInput.addEventListener('blur', (e) => {
+    const maxQ = parseInt(elements.numQuestionsInput.max, 10) || 1;
+    let val = parseInt(e.target.value, 10);
+    if (isNaN(val) || val < 1) val = 1;
+    if (val > maxQ) val = maxQ;
+    e.target.value = val;
+    updateTimerHint(val);
+  });
+
+  // Start exam execution
+  elements.btnStartConfirmed.addEventListener('click', async () => {
+    const mode = getSelectedFilterMode();
+    let questionsPool = [];
+
+    if (mode === 'year') {
+      const yr = parseInt(elements.yearInput.value, 10);
+      if (isNaN(yr) || yr < state.minYear || yr > state.maxYear) {
+        showError(elements.yearError, `Please enter a valid year within [${state.minYear}, ${state.maxYear}].`);
+        elements.yearInput.focus();
+        return;
+      }
+      questionsPool = await fetchQuestionsByYear(yr);
+    } else if (mode === 'subject') {
+      const filename = elements.subjectSelect.value;
+      if (!filename) {
+        showError(elements.subjectError, 'Please select a valid subject.');
+        return;
+      }
+      questionsPool = await fetchQuestionsBySubject(filename);
+    } else {
+      questionsPool = await fetchAllQuestions();
+    }
+
+    if (questionsPool.length === 0) {
+      showError(elements.countError, 'Failed to load questions for the selected criteria.');
+      return;
+    }
+
+    const maxQ = questionsPool.length;
+    let count = parseInt(elements.numQuestionsInput.value, 10);
+    if (isNaN(count) || count < 1) count = 1;
+    if (count > maxQ) count = maxQ;
+
+    // Randomize and slice
+    state.activeQuestions = [...questionsPool].sort(() => Math.random() - 0.5).slice(0, count);
+
+    const timerMode = elements.timerModeSelect.value;
+    let totalSeconds = 0;
+    if (timerMode === 'standard') totalSeconds = count * 72;
+    if (timerMode === 'speed') totalSeconds = count * 45;
+
+    elements.startModal.style.display = 'none';
+    renderQuestion(0);
+    startTimer(totalSeconds);
+  });
+}
+
+// Initializer
+window.addEventListener('DOMContentLoaded', () => {
+  setupEventListeners();
+  initEngine();
+});

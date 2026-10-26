@@ -1,0 +1,30 @@
+[
+  {
+    "year": "2024",
+    "qno": "2",
+    "subject": "Indian Economy",
+    "question": "Consider the following statements: 1. In India, Non-Banking Financial Companies can access the Liquidity Adjustment Facility window of the Reserve Bank of India. 2. In India, Foreign Institutional Investors can hold the Government Securities (G-Secs). 3. In India, Stock Exchanges can offer separate trading platforms for debts. Which of the statements given above is/are correct?",
+    "options": [
+      "1 and 2 only",
+      "3 only",
+      "1, 2 and 3",
+      "2 and 3 only"
+    ],
+    "answer": "D",
+    "explanation": "Statement 1 is incorrect: Under RBI rules, only scheduled commercial banks and Primary Dealers are eligible for the Liquidity Adjustment Facility (LAF) window. Statement 2 is correct: FIIs/FPIs are permitted to invest in and hold G-Secs subject to specified limits. Statement 3 is correct: Stock exchanges operate dedicated debt segments for trading debt securities."
+  },
+  {
+    "year": "2027",
+    "qno": "4",
+    "subject": "Indian Economy",
+    "question": "In the context of the Periodic Labour Force Survey (PLFS) conducted by the National Statistics Office (NSO), consider the following statements:\n1. The Labour Force Participation Rate (LFPR) is defined as the percentage of persons in the labour force (working or seeking/available for work) in the population.\n2. The Worker Population Ratio (WPR) measures the percentage of employed persons relative to the total population.\n3. The Usual Principal Activity Status approach classifies a person's activity based on the major time spent during the 365 days preceding the date of survey.\nWhich of the statements given above are correct?",
+    "options": [
+      "1 and 2 only",
+      "2 and 3 only",
+      "1 and 3 only",
+      "1, 2 and 3"
+    ],
+    "answer": "D",
+    "explanation": "All three statements are correct per NSO definitions. LFPR measures the proportion of a country's population that is actively engaged in or seeking economic work. WPR reflects the proportion of employed persons in the population. The Usual Activity Status identifies employment based on the reference period of the preceding 365 days, separating principal status (majority time) and subsidiary status."
+  }
+]

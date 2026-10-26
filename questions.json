@@ -1,0 +1,324 @@
+[
+  {
+    "year": "2024",
+    "qno": "1",
+    "subject": "Human Geography",
+    "question": "The total fertility rate in an economy is defined as:",
+    "options": [
+      "the number of children born per 1000 people in the population in a year",
+      "the number of children born to a couple in their lifetime in a given population",
+      "the birth rate minus death rate",
+      "the average number of live births a woman would have by the end of her child-bearing age"
+    ],
+    "answer": "D",
+    "explanation": "Total Fertility Rate (TFR) measures the average number of live births a woman would have if she were to survive through her reproductive child-bearing years (15–49) and bear children in accordance with prevailing age-specific fertility rates."
+  },
+  {
+    "year": "2027",
+    "qno": "1",
+    "subject": "World Economy",
+    "question": "With reference to Bilateral Currency Swap Arrangements and the SAARC Currency Swap Framework, consider the following statements:\n1. A currency swap arrangement involves exchanging a predetermined amount of domestic currency for foreign currency at a specified exchange rate with an agreement to reverse the transaction at a later date.\n2. Under the SAARC Currency Swap Framework operated by the Reserve Bank of India, drawdown facilities are offered exclusively in Indian Rupees (INR).\n3. Currency swap agreements can serve as a temporary liquidity bridge to mitigate short-term balance-of-payments (BoP) strains without impacting foreign exchange reserves permanently.\nWhich of the statements given above are correct?",
+    "options": [
+      "1 and 2 only",
+      "2 and 3 only",
+      "1 and 3 only",
+      "1, 2 and 3"
+    ],
+    "answer": "C",
+    "explanation": "Statements 1 and 3 are correct. A currency swap is an agreement between two central banks to exchange currencies with predetermined terms for repayment, helping recipient nations address short-term balance of payment crises and liquidity shortfalls. Statement 2 is incorrect because the SAARC Currency Swap facility offers drawdowns in US Dollars, Euros, and Indian Rupees (INR), not exclusively in INR."
+  },
+  {
+    "year": "2026",
+    "qno": "1",
+    "subject": "Geomorphology",
+    "question": "Consider the following assertion:\n\"In the Pleistocene period either the Yamuna once flowed into the Indus, or the Sutlej flowed into the Yamuna and one major tributary of either had shifted from the Ganga to the Indus or vice versa.\"\nWhich of the following is/are the basis of the above assertion?\n1. The Nadi-Sukta of the Rigveda.\n2. The explorations of the Sutlej and the Yamuna by Robert Bruce Foote.\n3. The presence of the same species of dolphins in both the Indus and the Ganga river systems.\nSelect the correct answer using the code given below:",
+    "options": [
+      "1 and 2 only",
+      "2 and 3 only",
+      "1 and 3 only",
+      "3 only"
+    ],
+    "answer": "D",
+    "explanation": "The Nadi-Sukta of the Rigveda is a sacred literary hymn honoring rivers rather than geological or paleogeographical evidence. Robert Bruce Foote is renowned as the father of Indian prehistory for his stone tool discoveries at Pallavaram, not for hydrological explorations demonstrating Pleistocene river capture. The presence of closely related freshwater river dolphins (Platanista gangetica and Platanista minor) in both the Ganga and Indus basins—mammals that cannot travel through saltwater marine environments—provides primary zoological and geological evidence of a prehistoric, continuous freshwater linkage between both drainage systems before tectonic diversions."
+  },
+  {
+    "year": "2026",
+    "qno": "10",
+    "subject": "Climatology",
+    "question": "With reference to the 'Polar Vortex', consider the following statements:\n1. It is a large area of low pressure and cold air surrounding the Earth's poles that strengthens in winter and weakens in summer.\n2. Sudden Stratospheric Warming (SSW) can disrupt the polar vortex, causing it to split and push Arctic air southward into mid-latitudes.\n3. It is confined entirely to the troposphere and has no interaction with stratospheric circulation.\nWhich of the statements given above is/are correct?",
+    "options": [
+      "1 only",
+      "1 and 2 only",
+      "2 and 3 only",
+      "1, 2 and 3"
+    ],
+    "answer": "B",
+    "explanation": "Statements 1 and 2 are correct. The Polar Vortex is a persistent, large-scale cyclone hovering over polar regions, strongest in winter when thermal contrast is highest. When a Sudden Stratospheric Warming (SSW) occurs, the vortex slows or buckles, spilling frigid Arctic cold waves southward across North America, Europe, or East Asia. Statement 3 is incorrect because the polar vortex exists in both the troposphere and the stratosphere, and vertical coupling between the two layers dictates its stability and surface weather impacts."
+  },
+  {
+    "year": "2026",
+    "qno": "11",
+    "subject": "Environment and Ecology",
+    "question": "Under the Ramsar Convention on Wetlands, which of the following can qualify for designation as a 'Wetland of International Importance'?\n1. Peatlands and bogs\n2. Coral reefs and marine areas with low-tide depth not exceeding six meters\n3. Human-made reservoirs and paddy fields\nSelect the correct answer using the code given below:",
+    "options": [
+      "1 and 2 only",
+      "2 and 3 only",
+      "1 and 3 only",
+      "1, 2 and 3"
+    ],
+    "answer": "D",
+    "explanation": "Under Article 1.1 of the Ramsar Convention, wetlands are defined broadly as 'areas of marsh, fen, peatland or water, whether natural or artificial, permanent or temporary, with water that is static or flowing, fresh, brackish or salt, including areas of marine water the depth of which at low tide does not exceed six metres.' Consequently, natural peatlands, shallow marine areas/coral reefs under six meters, and human-made wetlands (e.g., reservoirs, fish ponds, salt pans, and irrigated agricultural lands like rice paddies) are eligible for Ramsar designation."
+  },
+  {
+    "year": 2023,
+    "qno": "12",
+    "subject": "Medieval Indian History",
+    "question": "Consider the following dynasties:\n1. Hoysala\n2. Gahadavala\n3. Kakatiya\n4. Yadava\nHow many of the above dynasties established their kingdoms in early eighth century AD?",
+    "options": [
+      "Only one",
+      "Only two",
+      "Only three",
+      "None"
+    ],
+    "answer": "D",
+    "explanation": "None of these dynasties established kingdoms in the early 8th century AD. The Gahadavalas of Kannauj, Hoysalas of Dvarasamudra, Kakatiyas of Warangal, and Yadavas (Seunas) of Devagiri all emerged as independent kingdom-builders later, primarily during the 11th and 12th centuries AD."
+  },
+  {
+    "year": 2023,
+    "qno": "13",
+    "subject": "Science & Technology",
+    "question": "Consider the following statements:\nStatement-I: India, despite having uranium deposits, depends on coal for most of its electricity production.\nStatement-II: Uranium, enriched to the extent of at least 60%, is required for the production of electricity in a nuclear power plant.\nWhich one of the following is correct in respect of the above statements?",
+    "options": [
+      "Both Statement-I and Statement-II are correct and Statement-II is the correct explanation for Statement-I",
+      "Both Statement-I and Statement-II are correct and Statement-II is not the correct explanation for Statement-I",
+      "Statement-I is correct but Statement-II is incorrect",
+      "Statement-I is incorrect but Statement-II is correct"
+    ],
+    "answer": "C",
+    "explanation": "Statement-I is correct: Coal accounts for over 50% of India's total electricity generation, while nuclear energy contributes around 2-3%, despite domestic uranium reserves. Statement-II is incorrect: Commercial nuclear power reactors use low-enriched uranium (LEU) typically enriched to 3% to 5% U-235 (or even natural un-enriched uranium in PHWRs). Uranium enriched to 60% or higher is considered highly enriched uranium (HEU) and is used in research reactors, naval propulsion, or nuclear weapons, not standard civil power plants."
+  },
+  {
+    "year": 2023,
+    "qno": "14",
+    "subject": "Economic Geography",
+    "question": "Consider the following statements:\n1. India has more arable area than China.\n2. The proportion of irrigated area is more in India as compared to China.\n3. The average productivity per hectare in Indian agriculture is higher than that in China.\nHow many of the above statements are correct?",
+    "options": [
+      "Only one",
+      "Only two",
+      "All three",
+      "None"
+    ],
+    "answer": "B",
+    "explanation": "Statement 1 is correct: India possesses the largest arable land area in the world (~156 million hectares), surpassing China (~119 million hectares). Statement 2 is correct: A higher proportion of India's total cultivated land is equipped for irrigation compared to China's total arable land proportion. Statement 3 is incorrect: China's agricultural productivity per hectare for major crops like rice, wheat, and maize is nearly double that of India due to higher mechanization and intensive input use. Therefore, only two statements are correct."
+  },
+  {
+    "year": 2023,
+    "qno": "15",
+    "subject": "Geomorphology",
+    "question": "Which one of the following is the best example of repeated falls in sea level, giving rise to present-day extensive marshland?",
+    "options": [
+      "Bhitarkanika Mangroves",
+      "Marakkanam Salt Pans",
+      "Naupada Swamp",
+      "Rann of Kutch"
+    ],
+    "answer": "D",
+    "explanation": "The Great and Little Rann of Kutch represent extensive salt marshes that were once shallow marine gulfs/inlets of the Arabian Sea. Repeated marine regressions, tectonic uplifts, and siltation led to the recession of the sea, resulting in the present-day seasonal and hyper-saline mudflats and marshes."
+  },
+  {
+    "year": 2023,
+    "qno": "16",
+    "subject": "World Economy",
+    "question": "Consider the following statements:\nStatement-I: Switzerland is one of the leading exporters of gold in terms of value.\nStatement-II: Switzerland has the second largest gold reserves in the world.\nWhich one of the following is correct in respect of the above statements?",
+    "options": [
+      "Both Statement-I and Statement-II are correct and Statement-II is the correct explanation for Statement-I",
+      "Both Statement-I and Statement-II are correct and Statement-II is not the correct explanation for Statement-I",
+      "Statement-I is correct but Statement-II is incorrect",
+      "Statement-I is incorrect but Statement-II is correct"
+    ],
+    "answer": "C",
+    "explanation": "Statement-I is correct: Switzerland is the world's leading gold refining hub and ranks among the top global exporters of gold by value. Statement-II is incorrect: According to the World Gold Council, the United States holds the largest gold reserves (~8,133 tonnes), followed by Germany, Italy, France, Russia, and China; Switzerland ranks around 7th or 8th globally, not second."
+  },
+  {
+    "year": "2024",
+    "qno": "2",
+    "subject": "Indian Economy",
+    "question": "Consider the following statements: 1. In India, Non-Banking Financial Companies can access the Liquidity Adjustment Facility window of the Reserve Bank of India. 2. In India, Foreign Institutional Investors can hold the Government Securities (G-Secs). 3. In India, Stock Exchanges can offer separate trading platforms for debts. Which of the statements given above is/are correct?",
+    "options": [
+      "1 and 2 only",
+      "3 only",
+      "1, 2 and 3",
+      "2 and 3 only"
+    ],
+    "answer": "D",
+    "explanation": "Statement 1 is incorrect: Under RBI rules, only scheduled commercial banks and Primary Dealers are eligible for the Liquidity Adjustment Facility (LAF) window. Statement 2 is correct: FIIs/FPIs are permitted to invest in and hold G-Secs subject to specified limits. Statement 3 is correct: Stock exchanges operate dedicated debt segments for trading debt securities."
+  },
+  {
+    "year": "2027",
+    "qno": "2",
+    "subject": "PSIR",
+    "question": "Which of the following countries are members of the Mekong-Ganga Cooperation (MGC) initiative?\n1. India\n2. Myanmar\n3. Thailand\n4. Bangladesh\n5. Cambodia\n6. Vietnam\nSelect the correct answer using the code given below:",
+    "options": [
+      "1, 2, 3 and 5 only",
+      "1, 2, 3, 5 and 6 only",
+      "1, 3, 4, 5 and 6 only",
+      "1, 2, 3, 4, 5 and 6"
+    ],
+    "answer": "B",
+    "explanation": "The Mekong-Ganga Cooperation (MGC) was established in 2000 at Vientiane, Laos. It comprises six member countries: India and five ASEAN riparian states of the Mekong basin (Cambodia, Laos, Myanmar, Thailand, and Vietnam). Bangladesh is not a member of the MGC."
+  },
+  {
+    "year": "2026",
+    "qno": "2",
+    "subject": "Art & Culture",
+    "question": "What does an empty seat represent in early Buddhist iconography?",
+    "options": [
+      "The meditation of the Buddha",
+      "The Buddha's First Sermon",
+      "The Buddha's Mahaparinibbana",
+      "The Buddha's Mahabhinishkramana"
+    ],
+    "answer": "A",
+    "explanation": "During the aniconic phase of early Buddhist sculpture (seen at Sanchi and Bharhut), the Buddha was not depicted in human form. Sculptors used symbols to convey major events of his life: an empty seat or vacant throne under the Bodhi tree signifies the meditation of the Buddha and his attainment of enlightenment at Bodh Gaya. The Dharmachakra represents the First Sermon, the Stupa symbolizes the Mahaparinibbana, and a riderless horse represents the Great Departure (Mahabhinishkramana)."
+  },
+  {
+    "year": "2024",
+    "qno": "3",
+    "subject": "Environment and Ecology",
+    "question": "Consider the following materials: 1. Agricultural residues 2. Corn grain 3. Wastewater treatment sludge 4. Wood mill waste. Which of the above can be used as feedstock for producing Sustainable Aviation Fuel?",
+    "options": [
+      "1 and 2 only",
+      "3 and 4 only",
+      "1, 2, 3 and 4",
+      "1, 3 and 4 only"
+    ],
+    "answer": "C",
+    "explanation": "Sustainable Aviation Fuel (SAF) can be synthesized via approved technological pathways from a diverse range of circular and biological feedstocks, including agricultural wastes, starch/grain (Alcohol-to-Jet), sewage sludge/wet bio-wastes, and forestry/wood mill residues."
+  },
+  {
+    "year": "2027",
+    "qno": "3",
+    "subject": "Indian Society",
+    "question": "The Global Hunger Index (GHI) score is computed based on which of the following four component indicators?\n1. Undernourishment\n2. Child Stunting\n3. Child Wasting\n4. Child Mortality\n5. Maternal Anaemia\nSelect the correct answer using the code given below:",
+    "options": [
+      "1, 2, 3 and 4 only",
+      "1, 2, 4 and 5 only",
+      "2, 3, 4 and 5 only",
+      "1, 3, 4 and 5 only"
+    ],
+    "answer": "A",
+    "explanation": "The Global Hunger Index (GHI), jointly published by Welthungerhilfe (WHH) and partner organizations, evaluates hunger using four indicators: Undernourishment (share of population with insufficient caloric intake), Child Stunting (low height-for-age under age five), Child Wasting (low weight-for-height under age five), and Child Mortality (mortality rate of children under age five). Maternal Anaemia is not one of the four core indicators."
+  },
+  {
+    "year": "2026",
+    "qno": "3",
+    "subject": "Ancient Indian History",
+    "question": "Which of the following pairs of ancient and modern names of rivers is/are correctly matched?\n1. Vitasta : Chenab\n2. Asikni : Jhelum\n3. Parushni : Ravi\n4. Yavyavati : Beas\nSelect the answer using the code given below:",
+    "options": [
+      "1 and 2 only",
+      "1, 2 and 3",
+      "3 only",
+      "2 and 4 only"
+    ],
+    "answer": "C",
+    "explanation": "In ancient Rigvedic geography, Parushni corresponds to the Ravi River, celebrated in Mandala 7 of the Rigveda as the site of the Battle of the Ten Kings (Dasarajna). Vitasta is the ancient name for the Jhelum (the Hydaspes of Greek records), Asikni corresponds to the Chenab (Acesines), and Vipasha corresponds to the Beas (Hyphasis). Therefore, only pair 3 is correctly matched."
+  },
+  {
+    "year": "2027",
+    "qno": "4",
+    "subject": "Indian Economy",
+    "question": "In the context of the Periodic Labour Force Survey (PLFS) conducted by the National Statistics Office (NSO), consider the following statements:\n1. The Labour Force Participation Rate (LFPR) is defined as the percentage of persons in the labour force (working or seeking/available for work) in the population.\n2. The Worker Population Ratio (WPR) measures the percentage of employed persons relative to the total population.\n3. The Usual Principal Activity Status approach classifies a person's activity based on the major time spent during the 365 days preceding the date of survey.\nWhich of the statements given above are correct?",
+    "options": [
+      "1 and 2 only",
+      "2 and 3 only",
+      "1 and 3 only",
+      "1, 2 and 3"
+    ],
+    "answer": "D",
+    "explanation": "All three statements are correct per NSO definitions. LFPR measures the proportion of a country's population that is actively engaged in or seeking economic work. WPR reflects the proportion of employed persons in the population. The Usual Activity Status identifies employment based on the reference period of the preceding 365 days, separating principal status (majority time) and subsidiary status."
+  },
+  {
+    "year": "2026",
+    "qno": "4",
+    "subject": "Modern Indian History",
+    "question": "Which of the following factors contributed to the formation of the Forward Bloc by Subhas Chandra Bose in 1939?\n1. Bose failed to win the confidence of Mahatma Gandhi.\n2. The Congress Left was disunited and failed to support Bose.\n3. The Communists did not support Bose in his endeavours.\n4. The supporters of M.N. Roy and socialist leaders like Jayaprakash Narayan preferred Congress unity to supporting Bose.\nSelect the answer using the code given below:",
+    "options": [
+      "1, 2 and 3",
+      "1, 2 and 4",
+      "1, 3 and 4",
+      "2 and 4 only"
+    ],
+    "answer": "B",
+    "explanation": "Statements 1, 2, and 4 are correct. Following the Tripuri Session of 1939, Bose resigned from the Congress presidency after failing to secure Mahatma Gandhi's confidence regarding the formation of the Working Committee. The Congress Left was fractured; leaders such as Jayaprakash Narayan and the Congress Socialist Party (CSP), together with Royists, opted not to split the Congress and prioritized overall party unity over backing Bose. Statement 3 is incorrect because the Communists initially supported Bose during his presidential election and early organizational efforts."
+  },
+  {
+    "year": "2026",
+    "qno": "5",
+    "subject": "Biogeography",
+    "question": "With respect to the Western Hoolock Gibbons, which of the following statements is/are correct?\n1. A Sanctuary in North-east India is home to this ape species listed as Endangered in the International Union for Conservation of Nature (IUCN) Red List.\n2. They have specialized brachiation and can easily swing between trees.\n3. They possess a strong and heavy build like gorillas, yet are remarkably agile tree climbers.\nSelect the answer using the code given below:",
+    "options": [
+      "1 only",
+      "1 and 2",
+      "2 and 3",
+      "3 only"
+    ],
+    "answer": "B",
+    "explanation": "Statements 1 and 2 are correct. The Western Hoolock Gibbon (the only ape species found in India) is categorized as Endangered on the IUCN Red List, and the Hoollongapar Gibbon Sanctuary in Jorhat, Assam is dedicated to its conservation. Gibbons are masters of brachiation, swinging hand-over-hand through canopy branches due to their elongated arms and flexible ball-and-socket wrist joints. Statement 3 is incorrect because gibbons are 'lesser apes' characterized by slender, lightweight, tailless bodies, unlike the heavy, massive skeletal build of great apes such as gorillas."
+  },
+  {
+    "year": "2026",
+    "qno": "6",
+    "subject": "Governance",
+    "question": "Which of the following statements in relation to NIRANTAR (National Institute for Research and Application of Natural Resources to Transform, Adapt and Build Resilience) is/are correct?\n1. Ecosystem Survey and Analysis is a vertical under this platform, the lead institute of which is Botanical Survey of India, Kolkata.\n2. Research and Management of Ecosystem Service is a vertical under this platform, the lead institute of which is Central Zoo Authority, New Delhi.\n3. Capacity Development Support is a vertical under this platform, the lead institute of which is Indian Institute of Forest Management, Bhopal.\nSelect the answer using the code given below:",
+    "options": [
+      "1 and 2 only",
+      "1 and 3 only",
+      "2 and 3 only",
+      "1, 2 and 3"
+    ],
+    "answer": "B",
+    "explanation": "Statements 1 and 3 are correct. Under the institutional verticals defined for environmental research and forestry management, Ecosystem Survey and Analysis is anchored by the Botanical Survey of India (BSI), Kolkata, and Capacity Development Support is led by the Indian Institute of Forest Management (IIFM), Bhopal. Statement 2 is incorrect because the lead institute designated for research and ecosystem service modeling is the Indian Council of Forestry Research and Education (ICFRE) / specialized scientific institutes, not the Central Zoo Authority."
+  },
+  {
+    "year": "2026",
+    "qno": "7",
+    "subject": "Constitution",
+    "question": "With reference to the writ jurisdiction under the Constitution of India, consider the following statements:\n1. The writ of Mandamus cannot be issued against a private individual or body who does not perform a public duty.\n2. The writ of Quo-Warranto can be sought by any interested person, even if the person's own fundamental rights are not violated.\n3. The High Court's jurisdiction to issue writs under Article 226 is narrower than that of the Supreme Court under Article 32.\nWhich of the statements given above is/are correct?",
+    "options": [
+      "1 and 2 only",
+      "2 only",
+      "1 and 3 only",
+      "1, 2 and 3"
+    ],
+    "answer": "A",
+    "explanation": "Statements 1 and 2 are correct. Mandamus lies only against public authorities, statutory bodies, or inferior tribunals to compel performance of a mandatory legal duty, and does not lie against a private entity lacking a public mandate. Unlike other writs where the petitioner must have locus standi, a petition for Quo-Warranto can be moved by any citizen to challenge unauthorized occupation of a substantive public office. Statement 3 is incorrect because the writ jurisdiction of High Courts under Article 226 is wider than that of the Supreme Court under Article 32: High Courts can issue writs for both Fundamental Rights and ordinary legal rights, whereas Article 32 is restricted solely to the enforcement of Fundamental Rights."
+  },
+  {
+    "year": "2026",
+    "qno": "8",
+    "subject": "Oceanography",
+    "question": "Consider the following statements regarding oceanic upwelling and ocean currents:\n1. Coastal upwelling occurs when wind-driven surface waters move offshore due to the Coriolis effect, allowing cold, nutrient-rich water to rise to the surface.\n2. The Benguela Current along the western coast of Southern Africa supports one of the most productive marine ecosystems in the world due to intense upwelling.\n3. Upwelling zones are generally associated with humid tropical rainforest climates on the adjacent coastal landmass.\nWhich of the statements given above is/are correct?",
+    "options": [
+      "1 only",
+      "1 and 2 only",
+      "2 and 3 only",
+      "1, 2 and 3"
+    ],
+    "answer": "B",
+    "explanation": "Statements 1 and 2 are correct. Wind blowing parallel to a coastline pushes surface waters offshore via Ekman transport, which pulls cold, deep, nutrient-laden water to the surface (coastal upwelling), fostering rich phytoplankton blooms and high fisheries productivity (as seen in the Benguela and Peru/Humboldt currents). Statement 3 is incorrect because cold ocean currents and cold upwelled waters stabilize the atmospheric boundary layer, suppress convection, and cause desiccation, giving rise to coastal fog and hyper-arid deserts (e.g., Namib and Atacama deserts) rather than humid tropical rainforests."
+  },
+  {
+    "year": "2026",
+    "qno": "9",
+    "subject": "Science & Technology",
+    "question": "RNA interference (RNAi) technology is increasingly being used in agriculture and medicine. Which of the following statements correctly explains its mechanism?",
+    "options": [
+      "It repairs double-stranded breaks in chromosomal DNA using homologous recombination.",
+      "It silences specific genes post-transcriptionally by degrading target messenger RNA (mRNA) or preventing its translation.",
+      "It introduces foreign genes directly into mitochondrial DNA to enhance cellular respiration.",
+      "It acts as an artificial enzyme that synthesizes functional proteins in cell-free environments."
+    ],
+    "answer": "B",
+    "explanation": "RNA interference (RNAi) is a natural cellular gene-silencing mechanism triggered by double-stranded RNA (dsRNA). Enzymes (such as Dicer) cleave dsRNA into small interfering RNAs (siRNAs), which guide the RNA-induced silencing complex (RISC) to bind with complementary messenger RNA (mRNA) molecules, inducing their cleavage or blocking translation, thereby silencing specific gene expression without altering the underlying nuclear DNA."
+  }
+]

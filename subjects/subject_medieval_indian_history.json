@@ -1,0 +1,16 @@
+[
+  {
+    "year": "2023",
+    "qno": "1",
+    "subject": "Medieval Indian History",
+    "question": "Consider the following dynasties:\n1. Hoysala\n2. Gahadavala\n3. Kakatiya\n4. Yadava\nHow many of the above dynasties established their kingdoms in early eighth century AD?",
+    "options": [
+      "Only one",
+      "Only two",
+      "Only three",
+      "None"
+    ],
+    "answer": "D",
+    "explanation": "None of these dynasties established kingdoms in the early 8th century AD. The Gahadavalas of Kannauj, Hoysalas of Dvarasamudra, Kakatiyas of Warangal, and Yadavas (Seunas) of Devagiri all emerged as independent kingdom-builders later, primarily during the 11th and 12th centuries AD."
+  }
+]

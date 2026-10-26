@@ -1,0 +1,30 @@
+[
+  {
+    "year": "2024",
+    "qno": "3",
+    "subject": "Environment and Ecology",
+    "question": "Consider the following materials: 1. Agricultural residues 2. Corn grain 3. Wastewater treatment sludge 4. Wood mill waste. Which of the above can be used as feedstock for producing Sustainable Aviation Fuel?",
+    "options": [
+      "1 and 2 only",
+      "3 and 4 only",
+      "1, 2, 3 and 4",
+      "1, 3 and 4 only"
+    ],
+    "answer": "C",
+    "explanation": "Sustainable Aviation Fuel (SAF) can be synthesized via approved technological pathways from a diverse range of circular and biological feedstocks, including agricultural wastes, starch/grain (Alcohol-to-Jet), sewage sludge/wet bio-wastes, and forestry/wood mill residues."
+  },
+  {
+    "year": "2026",
+    "qno": "11",
+    "subject": "Environment and Ecology",
+    "question": "Under the Ramsar Convention on Wetlands, which of the following can qualify for designation as a 'Wetland of International Importance'?\n1. Peatlands and bogs\n2. Coral reefs and marine areas with low-tide depth not exceeding six meters\n3. Human-made reservoirs and paddy fields\nSelect the correct answer using the code given below:",
+    "options": [
+      "1 and 2 only",
+      "2 and 3 only",
+      "1 and 3 only",
+      "1, 2 and 3"
+    ],
+    "answer": "D",
+    "explanation": "Under Article 1.1 of the Ramsar Convention, wetlands are defined broadly as 'areas of marsh, fen, peatland or water, whether natural or artificial, permanent or temporary, with water that is static or flowing, fresh, brackish or salt, including areas of marine water the depth of which at low tide does not exceed six metres.' Consequently, natural peatlands, shallow marine areas/coral reefs under six meters, and human-made wetlands (e.g., reservoirs, fish ponds, salt pans, and irrigated agricultural lands like rice paddies) are eligible for Ramsar designation."
+  }
+]
