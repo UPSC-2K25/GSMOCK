@@ -1,19 +1,5 @@
 [
   {
-    "year": "2023",
-    "qno": "5",
-    "subject": "World Economy",
-    "question": "Consider the following statements:\nStatement-I: Switzerland is one of the leading exporters of gold in terms of value.\nStatement-II: Switzerland has the second largest gold reserves in the world.\nWhich one of the following is correct in respect of the above statements?",
-    "options": [
-      "Both Statement-I and Statement-II are correct and Statement-II is the correct explanation for Statement-I",
-      "Both Statement-I and Statement-II are correct and Statement-II is not the correct explanation for Statement-I",
-      "Statement-I is correct but Statement-II is incorrect",
-      "Statement-I is incorrect but Statement-II is correct"
-    ],
-    "answer": "C",
-    "explanation": "Statement-I is correct: Switzerland is the world's leading gold refining hub and ranks among the top global exporters of gold by value. Statement-II is incorrect: According to the World Gold Council, the United States holds the largest gold reserves (~8,133 tonnes), followed by Germany, Italy, France, Russia, and China; Switzerland ranks around 7th or 8th globally, not second."
-  },
-  {
     "year": "2027",
     "qno": "1",
     "subject": "World Economy",
